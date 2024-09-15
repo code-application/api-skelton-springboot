@@ -45,6 +45,34 @@ dependencies {
 	testImplementation 'io.rest-assured:rest-assured:5.3.0'
 }
 
+test {
+    filter {
+        // explicitly exclude integration tests
+        excludeTestsMatching "com.code.skelton.integration.*"
+    }
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+// テスト実行時、APIサーバーとDBサーバーを起動させる必要がある
+tasks.register("apiTest", Test) {
+	description = 'Runs integration tests.'
+	group = 'verification'
+
+	useJUnitPlatform()
+	filter {
+		includeTestsMatching "com.code.skelton.integration.*"
+	}
+	// プロパティを取得し、デフォルト値(local)を設定
+    def activeProfile = project.hasProperty('profile') ? project.profile : 'local'
+
+    doFirst {
+        println "Using profile: ${activeProfile}"
+    }
+
+    // テスト実行時にプロパティを設定
+    systemProperty 'spring.profiles.active', activeProfile
+
 }
