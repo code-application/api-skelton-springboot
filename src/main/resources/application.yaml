@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: skelton
+  profiles:
+    active: local
+  devtools:
+    remote:
+      restart:
+        enabled: true
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+  web:
+    resources:
+      add-mappings: false # 静的コンテンツの提供を無効にする。NoHandlerFoundExceptionをスローするための設定
+logging:
+  level:
+    org:
+      springframework: DEBUG
