@@ -1,9 +1,7 @@
 package com.code.skelton.integration.hello.requests;
 
 import static io.restassured.RestAssured.given;
-
 import com.code.skelton.integration.common.requests.BaseApi;
-
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
