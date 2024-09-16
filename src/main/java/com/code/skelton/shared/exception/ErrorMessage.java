@@ -1,8 +1,7 @@
 package com.code.skelton.shared.exception;
 
 /*
- * エラーメッセージを定義するクラス
- * 一覧としてもっておきたいため、1つのクラスに書く
+ * エラーメッセージを定義するクラス. 一覧としてもっておきたいため、1つのクラスに書く. 他の保持方法要検討
  */
 public class ErrorMessage {
 

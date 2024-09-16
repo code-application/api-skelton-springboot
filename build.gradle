@@ -103,3 +103,8 @@ tasks.register("apiTest", Test) {
     systemProperty 'spring.profiles.active', activeProfile
 
 }
+
+javadoc {
+    destinationDir = file("${buildDir}/docs/javadoc")
+	options.encoding = 'UTF-8'
+}

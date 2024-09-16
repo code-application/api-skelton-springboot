@@ -17,8 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     /*
-     * NoHandlerFoundExceptionの場合の例外ハンドリング
-     * 親クラスのメソッドをオーバーライドし、カスタムのエラーレスポンスを返却する
+     * NoHandlerFoundExceptionの場合の例外ハンドリング 親クラスのメソッドをオーバーライドし、カスタムのエラーレスポンスを返却する
      * 
      * @param NoHandlerFoundException 例外
      * 
@@ -31,9 +30,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
      * @return ResponseEntity<ErrorResponse> カスタムエラーレスポンス
      */
     @Override
-    protected ResponseEntity<Object> handleNoHandlerFoundException(
-            NoHandlerFoundException ex, HttpHeaders headers,
-            HttpStatusCode status, WebRequest request) {
+    protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex,
+            HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         ErrorResponse error = new NotFoundErrorResponse();
         return new ResponseEntity<>(error, status);
     }
@@ -48,8 +46,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
      * @return ResponseEntity<ErrorResponse> カスタムエラーレスポンス
      */
     @ExceptionHandler(BusinessFailureException.class)
-    public final ResponseEntity<ErrorResponse> handleBusinessFailureException(BusinessFailureException ex,
-            WebRequest request) {
+    public final ResponseEntity<ErrorResponse> handleBusinessFailureException(
+            BusinessFailureException ex, WebRequest request) {
         ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(),
                 ErrorCode.EB_BAD_REQUEST, ErrorMessage.BAD_REQUEST_MESSAGE + ex.getMessage());
         return new ResponseEntity<ErrorResponse>(error, HttpStatus.BAD_REQUEST);
@@ -65,7 +63,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
      * @return ResponseEntity<ErrorResponse> カスタムエラーレスポンス
      */
     @ExceptionHandler(Exception.class)
-    public final ResponseEntity<ErrorResponse> handleOtherExceptions(Exception ex, WebRequest request) {
+    public final ResponseEntity<ErrorResponse> handleOtherExceptions(Exception ex,
+            WebRequest request) {
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
         ErrorResponse error = new SystemErrorResponse();
         return new ResponseEntity<>(error, status);

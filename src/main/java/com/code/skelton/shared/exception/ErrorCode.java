@@ -1,7 +1,7 @@
 package com.code.skelton.shared.exception;
 
 /*
- * エラーコードの定数を保持するクラス
+ * エラーコードの定数を保持するクラス. 一覧としてもっておきたいため、1つのクラスに書く. 他の保持方法要検討
  */
 public class ErrorCode {
 

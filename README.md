@@ -42,3 +42,13 @@
 ```sh
 ./gradlew jacocoTestReport
 ```
+
+### ドキュメント出力
+
+#### javadoc
+
+JavaDoc を`build\docs\javadoc\index.html`に出力する
+
+```sh
+./gradlew javadoc
+```
