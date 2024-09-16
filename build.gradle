@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.3.3'
 	id 'io.spring.dependency-management' version '1.1.6'
+	id 'jacoco'
 }
 
 group = 'com.code'
@@ -43,6 +44,32 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/io.rest-assured/rest-assured
 	testImplementation 'io.rest-assured:rest-assured:5.3.0'
+}
+
+jacocoTestReport {
+    reports {
+        // XML形式のレポートを出力する
+        xml.required = true
+        // HTML形式のレポートを出力する
+        html.required = true
+        
+        // XML形式のレポートの出力場所
+        xml.outputLocation = file("${rootDir}/build/reports/coverage/${project.name}/jacocoTestReport.xml")
+        // HTML形式のレポートの出力場所
+        html.outputLocation = file("${rootDir}/build/reports/coverage/${project.name}/html")
+    }
+
+	// カバレッジ取得対象外とするパスを追加
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+				// 例："com/code/skelton/shared/*"
+            ])
+        }))
+    }
+}
+tasks.named('check') {
+    dependsOn tasks.named('jacocoTestReport', JacocoReport) 
 }
 
 test {
